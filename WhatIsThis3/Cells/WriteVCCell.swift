@@ -6,23 +6,40 @@
 //
 
 import UIKit
-import SnapKit
+import PhotosUI
+import CoreData
 
 class WriteVCCell: UICollectionViewCell {
-    private lazy var imageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.layer.borderWidth = 0.5
-        imageView.layer.borderColor = UIColor.separator.cgColor
-        imageView.clipsToBounds = true
-        imageView.contentMode = .scaleAspectFill
-        return imageView
-    }()
+  
+    @IBOutlet weak var WriteImageView: UIImageView!
     
-    func setup() {
-        addSubview(imageView)
-        imageView.snp.makeConstraints{
-            $0.edges.equalToSuperview()
+    func loadImage(asset: PHAsset) {
+        let imageManager = PHImageManager()
+        let scale = UIScreen.main.scale
+        let imageSize = CGSize(width: 200 * scale, height: 200 * scale)
+        
+        let options = PHImageRequestOptions()
+        options.deliveryMode = .highQualityFormat //고화질만 설정하기
+        
+        imageManager.requestImage(for: asset, targetSize: imageSize, contentMode: .aspectFill, options: options) { image, info in
+            self.WriteImageView.image = image
         }
     }
-    
+  
+}
+
+extension WriteVCCell: WriteViewControllerDelegate2 {
+    func saveImage() {
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        let photo = NSEntityDescription.insertNewObject(forEntityName: "CustomerList", into: context) as! CustomerList
+        let png = self.WriteImageView.image?.pngData()
+        photo.image = png
+        
+        do {
+            try context.save()
+        } catch let error {
+            print(error.localizedDescription)
+        }
+        
+    }
 }
