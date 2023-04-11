@@ -8,16 +8,23 @@
 import UIKit
 import CoreData
 import Firebase
+import GoogleSignIn
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
-
-
+   
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         FirebaseApp.configure()
+        
+//        GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
+        
         return true
+    }
+    
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
+        return GIDSignIn.sharedInstance.handle(url)
+                
     }
 
     // MARK: UISceneSession Lifecycle
@@ -78,6 +85,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
+//    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+//        
+//        print("-->>> 넘어왔니")
+//        if let error = error {
+//            print("EEROR Google Sign In \(error.localizedDescription)")
+//            return
+//        }
+//        
+//        guard let authentication = user.authentication else {return}
+//        let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken, accessToken: authentication.accessToken)
+//        
+//        Auth.auth().signIn(with: credential) { _, _ in
+//            self.showMainViewController()
+//           
+//        }
+//    }
+//    
+//    private func showMainViewController() {
+//        let mainViewController = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(identifier: "MainViewController")
+//        mainViewController.modalPresentationStyle = .fullScreen
+//        UIApplication.shared.windows.first?.rootViewController?.show(mainViewController, sender: nil)
+//    }
+    
+
 
 }
 

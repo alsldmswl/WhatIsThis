@@ -7,11 +7,11 @@
 
 import UIKit
 import FirebaseDatabase
+import FirebaseAuth
 
 class MainViewController: UIViewController {
 
     @IBOutlet weak var MainCollectionView: UICollectionView!
-    @IBOutlet weak var logoutButton: UIButton!
     
     let db = Database.database().reference()
     var customers: [Customer] = []
@@ -32,12 +32,16 @@ class MainViewController: UIViewController {
         navigationController?.navigationBar.isHidden = true
         fetchData()
         MainCollectionView.reloadData()
+//        let email = Auth.auth().currentUser?.email ?? "고객"
+        
+        
+        
 //        sort()
     }
     
     func fetchData() {
         db.child("myCustomer").observeSingleEvent(of: .value) { snapshot in
-            print("---> \(snapshot.value)")
+            print("---> \(String(describing: snapshot.value))")
             
             do {
                 let data = try JSONSerialization.data(withJSONObject: snapshot.value, options: [])
@@ -53,11 +57,6 @@ class MainViewController: UIViewController {
         }
     }
     
-
-    @IBAction func logoutButtonTapped(_ sender: UIButton) {
-        
-        self.navigationController?.popToRootViewController(animated: true)
-    }
     
     @IBAction func addButtonTapped(_ sender: UIButton) {
         let writeViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "WriteViewController")
@@ -65,6 +64,13 @@ class MainViewController: UIViewController {
         navigationController?.show(writeViewController, sender: nil)
     }
     
+    @IBAction func settingButtonTapped(_ sender: UIButton) {
+        
+        let settingViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "SettingViewController")
+        settingViewController.modalPresentationStyle = .fullScreen
+        navigationController?.show(settingViewController, sender: nil)
+        
+    }
     
     private func layout() -> UICollectionViewCompositionalLayout {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(140))

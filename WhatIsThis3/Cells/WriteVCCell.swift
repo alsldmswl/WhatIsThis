@@ -7,7 +7,6 @@
 
 import UIKit
 import PhotosUI
-import CoreData
 
 class WriteVCCell: UICollectionViewCell {
   
@@ -28,18 +27,4 @@ class WriteVCCell: UICollectionViewCell {
   
 }
 
-extension WriteVCCell: WriteViewControllerDelegate2 {
-    func saveImage() {
-        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-        let photo = NSEntityDescription.insertNewObject(forEntityName: "CustomerList", into: context) as! CustomerList
-        let png = self.WriteImageView.image?.pngData()
-        photo.image = png
-        
-        do {
-            try context.save()
-        } catch let error {
-            print(error.localizedDescription)
-        }
-        
-    }
-}
+

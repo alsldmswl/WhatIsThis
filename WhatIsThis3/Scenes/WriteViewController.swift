@@ -7,16 +7,14 @@
 
 import UIKit
 import FirebaseDatabase
+import FirebaseStorage
+import FirebaseAuth
 import PhotosUI
-import CoreData
 
 protocol WriteViewControllerDelegate1: AnyObject {
     func didFinishSaveData()
 }
 
-protocol WriteViewControllerDelegate2: AnyObject {
-    func saveImage()
-}
 
 class WriteViewController: UIViewController {
     
@@ -26,14 +24,11 @@ class WriteViewController: UIViewController {
     var fetchResults: PHFetchResult<PHAsset>?
 
     weak var delegate1: WriteViewControllerDelegate1?
-    weak var delegate2: WriteViewControllerDelegate2?
   
     @IBOutlet weak var writeCollectionView: UICollectionView!
     
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var contentTextView: UITextView!
-    
-    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,7 +50,6 @@ class WriteViewController: UIViewController {
         let myCustomer = Customer(id: "\(Customer.id)", title: titleTextField.text ?? "", content: contentTextView.text ?? "")
         Customer.id += 1
         db.child("myCustomer").child(myCustomer.id).setValue(myCustomer.toDic)
-        delegate2?.saveImage()
         delegate1?.didFinishSaveData()
         navigationController?.popViewController(animated: true)
     }
@@ -144,11 +138,23 @@ extension WriteViewController: PHPickerViewControllerDelegate {
         self.fetchResults = PHAsset.fetchAssets(withLocalIdentifiers: identifiers, options: nil)
         self.writeCollectionView.reloadData()
         self.dismiss(animated: true)
-       
     }
   
 }
-
+extension WriteViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        guard let selectedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage,
+              let user = Auth.auth().currentUser else {return}
+        
+        FirebaseStorageManager.uploadImage(image: selectedImage, pathRoot: user.uid) { url in
+            if let url = url {
+                UserDefaults.standard.set(url.absoluteString, forKey: "myImageUrl")
+            }
+        }
+        picker.dismiss(animated: true)
+        
+    }
+}
 struct Customer: Codable {
     let id: String
     let title: String

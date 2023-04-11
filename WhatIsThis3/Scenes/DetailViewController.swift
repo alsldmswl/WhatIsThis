@@ -28,7 +28,6 @@ class DetailViewController: UIViewController {
     let appdelegate = UIApplication.shared.delegate as! AppDelegate
     
 //    weak var delegate: DetailViewControllerDelegate?
-    var customerList = [CustomerList]()
     var selectedCustomerList: Customer?
     var indexPath: IndexPath?
     
@@ -37,7 +36,7 @@ class DetailViewController: UIViewController {
         detailCollectionView.collectionViewLayout = layout()
         detailCollectionView.delegate = self
         detailCollectionView.dataSource = self
-        fetchImage()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -61,29 +60,18 @@ class DetailViewController: UIViewController {
         return layout
     }
     
-    func fetchImage() {
-        let fetchRequest : NSFetchRequest<CustomerList> = CustomerList.fetchRequest()
-        let context = appdelegate.persistentContainer.viewContext
-        
-        do {
-            self.customerList = try context.fetch(fetchRequest)
-        } catch {
-            print(error)
-        }
-    }
     
 }
 
 extension DetailViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return customerList.count
+        return 3
         
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DetailVCCell", for: indexPath) as! DetailCollectionViewCell
-        let photo = UIImage(data: customerList[indexPath.item].image!)
-        cell.detailImageView.image = photo
+       
         return cell
     }
 
