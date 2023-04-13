@@ -18,8 +18,6 @@
 		BD93E64729E18D2800C2FA09 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD93E64629E18D2800C2FA09 /* MainViewController.swift */; };
 		BD93E64A29E19DD500C2FA09 /* MainVCCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD93E64929E19DD500C2FA09 /* MainVCCell.swift */; };
 		BD93E64D29E1A4A200C2FA09 /* WriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD93E64C29E1A4A200C2FA09 /* WriteViewController.swift */; };
-		BD93E64F29E1AA2600C2FA09 /* WriteVCCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD93E64E29E1AA2600C2FA09 /* WriteVCCell.swift */; };
-		BD93E65429E2770600C2FA09 /* DetailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD93E65329E2770600C2FA09 /* DetailCollectionViewCell.swift */; };
 		BD93E65629E2775A00C2FA09 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD93E65529E2775A00C2FA09 /* DetailViewController.swift */; };
 		BD93E65829E27F2800C2FA09 /* DetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD93E65729E27F2800C2FA09 /* DetailTableViewCell.swift */; };
 		BD93E6DE29E3F15C00C2FA09 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BD93E6DD29E3F15C00C2FA09 /* GoogleService-Info.plist */; };
@@ -50,8 +48,6 @@
 		BD93E64629E18D2800C2FA09 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		BD93E64929E19DD500C2FA09 /* MainVCCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVCCell.swift; sourceTree = "<group>"; };
 		BD93E64C29E1A4A200C2FA09 /* WriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteViewController.swift; sourceTree = "<group>"; };
-		BD93E64E29E1AA2600C2FA09 /* WriteVCCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteVCCell.swift; sourceTree = "<group>"; };
-		BD93E65329E2770600C2FA09 /* DetailCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCollectionViewCell.swift; sourceTree = "<group>"; };
 		BD93E65529E2775A00C2FA09 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		BD93E65729E27F2800C2FA09 /* DetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTableViewCell.swift; sourceTree = "<group>"; };
 		BD93E6DD29E3F15C00C2FA09 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -102,6 +98,7 @@
 				BD93E70029E5285F00C2FA09 /* WhatIsThis3.entitlements */,
 				BD93E62D29E188B800C2FA09 /* AppDelegate.swift */,
 				BD93E62F29E188B800C2FA09 /* SceneDelegate.swift */,
+				BD3B7BFC29E58AFE00086B15 /* FirebaseStorageManager.swift */,
 				BD93E64B29E19DDC00C2FA09 /* Cells */,
 				BD93E64829E1936C00C2FA09 /* Scenes */,
 				BD93E63329E188B800C2FA09 /* Main.storyboard */,
@@ -109,7 +106,6 @@
 				BD93E63B29E188BA00C2FA09 /* LaunchScreen.storyboard */,
 				BD93E63E29E188BA00C2FA09 /* Info.plist */,
 				BD93E6DD29E3F15C00C2FA09 /* GoogleService-Info.plist */,
-				BD3B7BFC29E58AFE00086B15 /* FirebaseStorageManager.swift */,
 			);
 			path = WhatIsThis3;
 			sourceTree = "<group>";
@@ -131,8 +127,6 @@
 			isa = PBXGroup;
 			children = (
 				BD93E64929E19DD500C2FA09 /* MainVCCell.swift */,
-				BD93E64E29E1AA2600C2FA09 /* WriteVCCell.swift */,
-				BD93E65329E2770600C2FA09 /* DetailCollectionViewCell.swift */,
 				BD93E65729E27F2800C2FA09 /* DetailTableViewCell.swift */,
 			);
 			path = Cells;
@@ -228,7 +222,6 @@
 			files = (
 				BD93E65629E2775A00C2FA09 /* DetailViewController.swift in Sources */,
 				BD93E63229E188B800C2FA09 /* LoginViewController.swift in Sources */,
-				BD93E65429E2770600C2FA09 /* DetailCollectionViewCell.swift in Sources */,
 				BD93E62E29E188B800C2FA09 /* AppDelegate.swift in Sources */,
 				BD93E63029E188B800C2FA09 /* SceneDelegate.swift in Sources */,
 				BD3B7BFD29E58AFE00086B15 /* FirebaseStorageManager.swift in Sources */,
@@ -238,7 +231,6 @@
 				BD93E64A29E19DD500C2FA09 /* MainVCCell.swift in Sources */,
 				BD93E64529E18CF400C2FA09 /* EnterEmailViewController.swift in Sources */,
 				BD93E64D29E1A4A200C2FA09 /* WriteViewController.swift in Sources */,
-				BD93E64F29E1AA2600C2FA09 /* WriteVCCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
